@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Oregano&display=swap");
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-newP: #032e15;
+  --color-newT: #bbf451;
+  --color-newBTN: #bbf451;
+}
+
+.oregano-font {
+    font-family: "Oregano", serif;
+    font-style: normal;
+  }
+  
