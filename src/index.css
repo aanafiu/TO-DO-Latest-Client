@@ -1,4 +1,7 @@
+/* Headline */
 @import url("https://fonts.googleapis.com/css2?family=Oregano&display=swap");
+/* All Font Text */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
 
@@ -8,8 +11,25 @@
   --color-newBTN: #bbf451;
 }
 
-.oregano-font {
-    font-family: "Oregano", serif;
-    font-style: normal;
-  }
-  
+.loading-lg
+{
+    width: 50px;
+    transition: all 3s;
+}
+
+.my-font {
+  font-family: "Oregano", serif;
+  font-style: normal;
+}
+.my-text {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+input {
+  border: 0px;
+  border-left: 0.3rem solid var(--color-newP);
+  font-weight: 600;
+  font-size: 16px;
+}
