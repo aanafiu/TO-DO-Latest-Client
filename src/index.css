@@ -11,6 +11,10 @@
   --color-newBTN: #bbf451;
 }
 
+p{
+    color: black;
+}
+
 .loading-lg
 {
     width: 50px;
@@ -32,4 +36,5 @@ input {
   border-left: 0.3rem solid var(--color-newP);
   font-weight: 600;
   font-size: 16px;
+  color: black;
 }

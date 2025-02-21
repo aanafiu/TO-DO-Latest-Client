@@ -8,40 +8,52 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { registerNewAccount,loginWithGoogle } = useContext(AuthContext);
+  const { registerNewAccount, loginWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(name, email, password);
-    try {
-      await axios.post("http://localhost:5001/userinformation", {
+    // registerNewAccount(email, password)
+    //   .then((res) => {
+    //     console.log(password, email, "resname",res);
+    axios
+      .post("https://kikilagbe.vercel.app/userinformation", {
         name,
         email,
         password,
-      });
-      //   console.log(response);
-      registerNewAccount(email,password)
-      .then(()=>{
-        toast.success("Account Created", {
+      })
+      .then(() => {
+        registerNewAccount(email, password).then(() => {
+          toast.success("Account Created With Email!", {
             style: {
               background: "#bbf451",
             },
           });
-          navigate("/")
-      })
- 
-    } catch (error) {
-      // console.log(error.status);
-      if (error.status === 400) {
-        toast.error("Already Have An Account", {
-          style: {
-            background: "#bbf451",
-          },
+
+          navigate("/"); // Redirect to home page
         });
-      }
-      navigate("/user/login")
-    }
+      })
+      .catch((error) => {
+        // console.log(error.status)
+        if (error.status === 400) {
+          toast.error("Account Already Created!", {
+            style: {
+              background: "#bbf451",
+            },
+          });
+        }
+      });
+
+    // })
+    // .catch((error) => {
+    //   if (error) {
+    //     toast.error("Already Account Had With Gmail!", {
+    //       style: {
+    //         background: "#bbf451",
+    //       },
+    //     });
+    //   }
+    // });
   };
 
   //   Google Sign UP
@@ -49,17 +61,19 @@ const Register = () => {
     try {
       const res = await loginWithGoogle(); // Firebase authentication
       const { displayName, email } = res.user; // Get user details
-      console.log(displayName,email, "resname")
-  
-      // Step 2: Check if the user exists in MongoDB
-      axios.post("http://localhost:5001/userinformation", {
-        name: displayName,
-        email,
-        password: "",
-      }).then((response)=>{
-        console.log(response,"resss")
+      console.log(displayName, email, "resname");
 
-        axios.post("http://localhost:5001/userinformation", {
+      // Step 2: Check if the user exists in MongoDB
+      axios
+        .post("https://kikilagbe.vercel.app/userinformation", {
+          name: displayName,
+          email,
+          password: "",
+        })
+        .then((response) => {
+          console.log(response, "resss");
+
+          axios.post("https://kikilagbe.vercel.app/userinformation", {
             name: displayName,
             email,
             password: "", // Since it's Google, no password needed
@@ -69,17 +83,17 @@ const Register = () => {
               background: "#bbf451",
             },
           });
-    
-        navigate("/"); // Redirect to home page
-      }).catch(()=>{
-        // console.log(error, "iamreg")
-        toast.error("Already Account Created With Gmail!", {
+
+          navigate("/"); // Redirect to home page
+        })
+        .catch(() => {
+          // console.log(error, "iamreg")
+          toast.error("Already Account Created With Gmail!", {
             style: {
               background: "#bbf451",
             },
           });
-      })
-  
+        });
     } catch (error) {
       console.error("Google Sign-In Error:", error);
       toast.error("Google Sign-In Failed!", {
@@ -87,13 +101,12 @@ const Register = () => {
           background: "#bbf451",
         },
       });
-  
+
       if (error.message === "Firebase: Error (auth/popup-closed-by-user).") {
         navigate("/user/register");
       }
     }
   };
-  
 
   return (
     <div className="w-full container mx-auto justify-center items-center flex h-[100%]">
