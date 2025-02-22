@@ -8,14 +8,12 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { registerNewAccount, loginWithGoogle } = useContext(AuthContext);
+  const { updateDetails, registerNewAccount, loginWithGoogle } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // registerNewAccount(email, password)
-    //   .then((res) => {
-    //     console.log(password, email, "resname",res);
     axios
       .post("https://kikilagbe.vercel.app/userinformation", {
         name,
@@ -24,13 +22,15 @@ const Register = () => {
       })
       .then(() => {
         registerNewAccount(email, password).then(() => {
-          toast.success("Account Created With Email!", {
-            style: {
-              background: "#bbf451",
-            },
-          });
+          updateDetails(name).then(() => {
+            toast.success("Account Created With Email!", {
+              style: {
+                background: "#bbf451",
+              },
+            });
 
-          navigate("/"); // Redirect to home page
+            navigate("/"); // Redirect to home page
+          });
         });
       })
       .catch((error) => {
@@ -78,6 +78,7 @@ const Register = () => {
             email,
             password: "", // Since it's Google, no password needed
           });
+          updateDetails(displayName);
           toast.success("Account Created With Gmail!", {
             style: {
               background: "#bbf451",

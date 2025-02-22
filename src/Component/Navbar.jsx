@@ -19,13 +19,12 @@ const Navbar = () => {
     });
   };
 
-  
   return (
     <>
-      <div className="navbar sticky outline-offset-8 bg-newP text-newT font-bold my-font">
+      <div className="container p-0 mx-auto navbar sticky top-10 outline-offset-8 bg-newP rounded-lg text-newT font-bold my-font">
         <div className="navbar-start">
           <Link
-            className="btn btn-ghost text-xl font-bold whitespace-nowrap oregano-font"
+            className="p-0 m-0 text-2xl font-bold whitespace-nowrap oregano-font"
             to={"/"}
           >
             Ki Ki Korbo !!!
@@ -60,9 +59,9 @@ const Navbar = () => {
               tabIndex={0}
               className="bg-green-950/50 menu menu-sm dropdown-content gap-y-5 text-center rounded-box z-[1] w-full p-2 shadow"
             >
-              <NavLink>Home</NavLink>
-              <NavLink>Add New Task</NavLink>
-              <NavLink>Dashboard</NavLink>
+              <NavLink to={"/"}>Home</NavLink>
+              <NavLink to={"addnewtask"}>Add New Task</NavLink>
+              <NavLink to={"dashboard"}>Dashboard</NavLink>
               {myDetails ? (
                 <button
                   onClick={handleLogout}
@@ -85,7 +84,7 @@ const Navbar = () => {
             <button
               onClick={handleLogout}
               type="button"
-              className="btn px-10 mr-10 btn-success bg-newBTN hidden sm:flex sm:btn-sm md:btn-md lg:btn-lg"
+              className="btn px-10 btn-success bg-newBTN hidden sm:flex sm:btn-sm md:btn-md lg:btn-lg"
             >
               Log Out
             </button>

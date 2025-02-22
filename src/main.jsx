@@ -10,6 +10,7 @@ import Register from "./Component/Authentication/Register";
 import PrivateRoutes from "./Component/Authentication/PrivateRoutes";
 import Error from "./Component/Pages/Error";
 import PublicRoutes from "./Component/Authentication/PublicRoutes";
+import AddToDoTask from "./Component/Pages/AddToDoTask";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -22,7 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/user/login" element={<PublicRoutes><Login /></PublicRoutes>} />      
           <Route path="/user/register" element={<PublicRoutes><Register /></PublicRoutes>} />  {/* ✅ Make it public */}
           <Route path="/dashboard" element={<PrivateRoutes><Dashboard /></PrivateRoutes>} /> {/* ✅ Make Dashboard Private */}
-          <Route path="/addnewtask" element={<PrivateRoutes><Login /></PrivateRoutes>} /> {/* Example Private Route */}
+          <Route path="/addnewtask" element={<PrivateRoutes><AddToDoTask></AddToDoTask></PrivateRoutes>} /> {/* Example Private Route */}
         </Route>
 
         <Route path="*" element={<Error />} />
